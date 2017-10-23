@@ -1,18 +1,10 @@
 import React, { Component } from 'react'
+import { View, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 
-import * as Styles from './Styles'
 import { initDecks, getDecks } from '../utils/api'
 import { receiveDecks } from '../actions'
-
-function Deck({ deck }) {
-  return (
-    <Styles.ListItem>
-      <Styles.Heading>{deck.title}</Styles.Heading>
-      <Styles.Paragraph>3 cards</Styles.Paragraph>
-    </Styles.ListItem>
-  )
-}
+import Deck from './Deck'
 
 class Decks extends Component {
   componentDidMount() {
@@ -25,11 +17,13 @@ class Decks extends Component {
     const { decks } = this.props
 
     return (
-      <Styles.Container>
+      <View style={{flex: 1, justifyContent: 'flex-start', alignItems: 'flex-start'}}>
         {decks && Object.keys(decks).map(key => (
-          <Deck key={key} deck={decks[key]} />
+          <View key={key} style={{borderBottomWidth: 1, borderBottomColor: 'grey', width: "100%", padding: 20}}>
+            <Deck deck={decks[key]} navigation={this.props.navigation} />
+          </View>
         ))}
-      </Styles.Container>
+      </View>
     )
   }
 }

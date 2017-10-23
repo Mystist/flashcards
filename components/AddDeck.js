@@ -27,15 +27,15 @@ class AddDeck extends Component {
   }
   render() {
     return (
-      <View>
-        <Text style={{ fontSize: 24, fontWeight: 'bold', marginTop: 12, marginBottom: 32 }}>Please enter Deck name:</Text>
+      <View style={{margin: 30}}>
+        <Text style={{ fontSize: 24, fontWeight: 'bold', margin: 12 }}>Please enter Deck name:</Text>
         <TextInput
-          style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+          style={{margin: 12, height: 40, borderColor: 'gray', borderWidth: 1}}
           onChangeText={(text) => this.setState({text})}
           value={this.state.text}
         />
-        <TouchableOpacity style={{ margin: 26, backgroundColor: 'goldenrod', height: 30, width: 80}} onPress={this.submit}>
-          <Text style={{ padding: 6, textAlign: 'center'}}>SUBMIT</Text>
+        <TouchableOpacity style={{margin: 12, backgroundColor: 'goldenrod', height: 30, width: 80}} onPress={this.submit}>
+          <Text style={{ padding: 8 }}>SUBMIT</Text>
         </TouchableOpacity>
       </View>
     );
