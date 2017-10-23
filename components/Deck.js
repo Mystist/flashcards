@@ -8,7 +8,7 @@ export const Heading = styled.Text`
   text-align: center;
   font-size: 22px;
   font-weight: bold;
-  margin: 4px 0;
+  margin: 8px 0;
 `
 
 export const Paragraph = styled.Text`
@@ -27,7 +27,7 @@ function Deck({ deck, navigation }) {
     <ListItem>
       <TouchableOpacity onPress={() => navigation ? navigation.navigate('DeckDetail', { deck }) : ''}>
         <Heading>{deck.title}</Heading>
-        <Paragraph>3 cards</Paragraph>
+        <Paragraph>{deck.questions.length} cards</Paragraph>
       </TouchableOpacity>
     </ListItem>
   )

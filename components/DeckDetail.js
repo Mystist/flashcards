@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
 import Deck from './Deck'
+import { connect } from 'react-redux'
 
 class DeckDetail extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -8,7 +9,7 @@ class DeckDetail extends Component {
   })
 
   addCard = () => {
-    console.log('sss');
+    this.props.navigation.navigate('AddCard', {deck: this.props.navigation.state.params.deck})
   }
 
   startQuiz = () => {
@@ -16,9 +17,11 @@ class DeckDetail extends Component {
   }
 
   render() {
+    const deck = this.props.decks[this.props.navigation.state.params.deck.title]
+
     return (
       <View style={{flex: 1, justifyContent: 'flex-start', alignItems: 'center', padding: 20}}>
-        <Deck deck={this.props.navigation.state.params.deck} />
+        <Deck deck={deck} />
 
         <TouchableOpacity style={{ margin: 16, backgroundColor: 'white', height: 30, width: 80}} onPress={this.addCard}>
           <Text style={{ padding: 8, color: 'black' }}>Add Card</Text>
@@ -31,4 +34,8 @@ class DeckDetail extends Component {
   }
 }
 
-export default DeckDetail
+const mapStateToProps = (decks) => ({
+  decks
+})
+
+export default connect(mapStateToProps)(DeckDetail)

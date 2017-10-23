@@ -10,32 +10,33 @@ class AddDeck extends Component {
   state = {
     text: ''
   }
+
   submit = () => {
     saveDeckTitle(this.state.text)
+      .then(() => {
+        this.props.dispatch(addDeck({
+          [this.state.text]: {
+            title: this.state.text,
+            questions: []
+          }
+        }))
 
-    this.props.dispatch(addDeck({
-      [this.state.text]: {
-        title: this.state.text
-      }
-    }))
+        this.setState({ text: '' })
+        this.props.navigation.dispatch(NavigationActions.back({key: 'AddDeck'}))
+      })
+  }
 
-    this.toHome()
-    this.setState({ text: '' })
-  }
-  toHome = () => {
-    this.props.navigation.dispatch(NavigationActions.back({key: 'AddDeck'}))
-  }
   render() {
     return (
       <View style={{margin: 30}}>
-        <Text style={{ fontSize: 24, fontWeight: 'bold', margin: 12 }}>Please enter Deck name:</Text>
+        <Text style={{ margin: 8, fontSize: 22, fontWeight: 'bold' }}>Please enter Deck name:</Text>
         <TextInput
-          style={{margin: 12, height: 40, borderColor: 'gray', borderWidth: 1}}
+          style={{margin: 8, height: 40, borderColor: 'gray', borderWidth: 1}}
           onChangeText={(text) => this.setState({text})}
           value={this.state.text}
         />
-        <TouchableOpacity style={{margin: 12, backgroundColor: 'goldenrod', height: 30, width: 80}} onPress={this.submit}>
-          <Text style={{ padding: 8 }}>SUBMIT</Text>
+        <TouchableOpacity style={{margin: 8, backgroundColor: 'goldenrod', height: 30, width: 80}} onPress={this.submit}>
+          <Text style={{ padding: 12 }}>SUBMIT</Text>
         </TouchableOpacity>
       </View>
     );

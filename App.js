@@ -10,6 +10,7 @@ import Decks from './components/Decks'
 import AddDeck from './components/AddDeck'
 import reducer from './reducers'
 import DeckDetail from './components/DeckDetail'
+import AddCard from './components/AddCard'
 
 function UdaciStatusBar ({ backgroundColor, ...props }) {
   return (
@@ -49,6 +50,9 @@ const Stacks = StackNavigator({
   },
   DeckDetail: {
     screen: DeckDetail,
+  },
+  AddCard: {
+    screen: AddCard,
   }
 })
 
