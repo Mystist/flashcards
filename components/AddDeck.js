@@ -14,15 +14,16 @@ class AddDeck extends Component {
   submit = () => {
     saveDeckTitle(this.state.text)
       .then(() => {
+        const deck = {
+          title: this.state.text,
+          questions: []
+        }
         this.props.dispatch(addDeck({
-          [this.state.text]: {
-            title: this.state.text,
-            questions: []
-          }
+          [this.state.text]: deck
         }))
 
         this.setState({ text: '' })
-        this.props.navigation.dispatch(NavigationActions.back({key: 'AddDeck'}))
+        this.props.navigation.navigate('DeckDetail', { deck })
       })
   }
 
