@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
 
+import { clearLocalNotification, setLocalNotification } from '../utils/helpers'
+
 const initialState = {
   current: 0,
   corrects: [],
@@ -24,6 +26,9 @@ class Quiz extends Component {
 
     if (this.state.current + 1 >= deck.questions.length) {
       this.setState({ hasDone: true })
+
+      clearLocalNotification()
+        .then(setLocalNotification)
     }
 
     this.setState({ current: ++this.state.current, isShowAnswer: false })
