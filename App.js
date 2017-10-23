@@ -11,6 +11,7 @@ import AddDeck from './components/AddDeck'
 import reducer from './reducers'
 import DeckDetail from './components/DeckDetail'
 import AddCard from './components/AddCard'
+import Quiz from './components/Quiz'
 
 function UdaciStatusBar ({ backgroundColor, ...props }) {
   return (
@@ -53,7 +54,10 @@ const Stacks = StackNavigator({
   },
   AddCard: {
     screen: AddCard,
-  }
+  },
+  Quiz: {
+    screen: Quiz,
+  },
 })
 
 export default class App extends React.Component {

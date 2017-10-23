@@ -13,7 +13,7 @@ class DeckDetail extends Component {
   }
 
   startQuiz = () => {
-    console.log('bbb');
+    this.props.navigation.navigate('Quiz', {deck: this.props.navigation.state.params.deck})
   }
 
   render() {
