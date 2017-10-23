@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
 import * as Styles from './Styles'
 import { initDecks, getDecks } from '../utils/api'
+import { receiveDecks } from '../actions'
 
 function Deck({ deck }) {
   return (
@@ -13,24 +15,27 @@ function Deck({ deck }) {
 }
 
 class Decks extends Component {
-  state = {
-    decks: null
-  }
   componentDidMount() {
     getDecks()
       .then(decks => {
-        decks === null ? initDecks() : this.setState({ decks })
+        decks === null ? initDecks() : this.props.dispatch(receiveDecks(decks))
       })
   }
   render() {
+    const { decks } = this.props
+
     return (
       <Styles.Container>
-        {this.state.decks && Object.keys(this.state.decks).map(key => (
-          <Deck key={key} deck={this.state.decks[key]} />
+        {decks && Object.keys(decks).map(key => (
+          <Deck key={key} deck={decks[key]} />
         ))}
       </Styles.Container>
     )
   }
 }
 
-export default Decks
+const mapStateToProps = (decks) => ({
+  decks
+})
+
+export default connect(mapStateToProps)(Decks)

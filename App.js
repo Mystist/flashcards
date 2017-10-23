@@ -3,9 +3,12 @@ import { Text, View, StatusBar } from 'react-native'
 import { TabNavigator } from 'react-navigation'
 import { Constants } from 'expo'
 import { Ionicons } from '@expo/vector-icons'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
 
 import Decks from './components/Decks'
 import AddDeck from './components/AddDeck'
+import reducer from './reducers'
 
 function UdaciStatusBar ({ backgroundColor, ...props }) {
   return (
@@ -35,10 +38,12 @@ const Tabs = TabNavigator({
 export default class App extends React.Component {
   render() {
     return (
-      <View style={{flex: 1}}>
-        <UdaciStatusBar backgroundColor='goldenrod' barStyle='light-content' />
-        <Tabs />
-      </View>
-    );
+      <Provider store={createStore(reducer)}>
+        <View style={{flex: 1}}>
+          <UdaciStatusBar backgroundColor='goldenrod' barStyle='light-content' />
+          <Tabs />
+        </View>
+      </Provider>
+    )
   }
 }
